@@ -1,0 +1,18 @@
+<fieldset class="rating" disabled>
+							<?php
+							for($i=5;$i>=1;$i--)
+							{
+							if($rating == $i)
+							{
+							echo '
+								<input type="radio" id="star'.$i.'" name="rating" value="'.$i.'" checked/><label class = "full" for="star'.$i.'"></label>
+								';
+							}
+							else
+							{
+								echo '
+								<input type="radio" id="star'.$i.'" name="rating" value="'.$i.'" /><label class = "full" for="star'.$i.'"></label>
+								';
+							}
+							}?>
+</fieldset>
