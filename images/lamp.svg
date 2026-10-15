@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Desk lamp">
+  <rect width="400" height="300" fill="#efe7da"/>
+  <path d="M150 70h150l-24 70H174z" fill="#e2a100"/>
+  <rect x="196" y="140" width="12" height="78" fill="#1b1730"/>
+  <rect x="150" y="214" width="110" height="16" rx="4" fill="#1b1730"/>
+</svg>

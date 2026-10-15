@@ -1,0 +1,7 @@
+---
+description: Working notes for the Prizm PHP catalog
+globs: "*.php"
+alwaysApply: true
+---
+
+Read AGENTS.md before changing behavior. Use PHP 8.3+ and PDO. Do not call mysql_*. Database credentials come from the environment, never from a committed password. Run `composer test` after PHP changes.

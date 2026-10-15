@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Bottle">
+  <rect width="400" height="300" fill="#efe7da"/>
+  <rect x="176" y="48" width="48" height="28" rx="4" fill="#1b1730"/>
+  <path d="M168 76h64l22 40v110a24 24 0 0 1-24 24h-60a24 24 0 0 1-24-24V116z" fill="#8ec5d6" stroke="#1b1730" stroke-width="6"/>
+  <rect x="160" y="140" width="80" height="14" fill="#d6453d"/>
+</svg>

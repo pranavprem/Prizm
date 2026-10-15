@@ -1,30 +1,31 @@
 <?php
 
-if(isset($_GET['pid']))
-{
+declare(strict_types=1);
 
-$isSession = session_start();
+require_once __DIR__ . '/util.php';
+prizm_session();
+header('Cache-Control: no-store');
 
-	if(isset($_SESSION['uid']))
-	{
-		if($isSession == True){
-			if(!isset($_SESSION['product_ids'])){
-				// $_SESSION['product_ids'] = $product_id;
-				$_SESSION['product_ids'] = "'".$_GET['pid']."'";
-			}
-			else{
-				$_SESSION['product_ids'] = $_SESSION['product_ids'] . "," ."'".$_GET['pid']."'";
-		
-			}
-			echo "Product added to cart";
-			
-		}
-		else{
-			echo "Session failed to start";
-		}
-	}
-	else{
-		echo "Please log in";
-	}
+if (!isset($_POST['pid']) && !isset($_GET['pid'])) {
+    http_response_code(400);
+    echo 'Missing product.';
+    return;
 }
-?>
+
+if (!prizm_csrf_ok()) {
+    http_response_code(400);
+    echo 'The request was rejected.';
+    return;
+}
+
+try {
+    $message = prizm_add_to_cart($_POST['pid'] ?? $_GET['pid']);
+} catch (Throwable $e) {
+    error_log($e->getMessage());
+    http_response_code(500);
+    echo 'The catalog is unavailable.';
+    return;
+}
+
+header('X-Cart-Count: ' . count(prizm_cart_ids()));
+echo $message;

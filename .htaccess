@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteRule ^(data|lib|tests|sql|bin|vendor|docs)(/|$) - [F,L]
+RewriteRule ^(util|config|router)\.php$ - [F,L]
+RewriteRule \.(sqlite|sqlite3)$ - [F,L]
+
+<FilesMatch "^\.env">
+    Require all denied
+</FilesMatch>

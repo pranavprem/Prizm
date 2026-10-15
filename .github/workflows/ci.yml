@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  sqlite:
+    name: PHP ${{ matrix.php }} sqlite
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ["8.3", "8.4"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: curl, mbstring, pdo_sqlite
+          coverage: none
+      - run: composer install --no-interaction --prefer-dist
+      - run: composer lint
+      - run: composer test
+      - name: Syntax check
+        run: find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 php -l
+
+  mysql:
+    name: PHP 8.3 mysql
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: prizm
+          MYSQL_DATABASE: 272project
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -pprizm"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: curl, mbstring, pdo_mysql
+          coverage: none
+      - run: composer install --no-interaction --prefer-dist
+      - name: Test
+        env:
+          PRIZM_DB_DRIVER: mysql
+          PRIZM_DB_HOST: 127.0.0.1
+          PRIZM_DB_PORT: "3306"
+          PRIZM_DB_NAME: 272project
+          PRIZM_DB_USER: root
+          PRIZM_DB_PASS: prizm
+          PRIZM_SEED: "0"
+        run: composer test

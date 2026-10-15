@@ -1,30 +1,34 @@
 <?php
-session_start();
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/util.php';
+prizm_session();
 ?>
-
-<!doctype html>
-<html>
-
-    <head>
-        <?php require "includes/head.php" ?>
-        <title>Prizm</title>
-        <?php ob_start(); ?>
-    </head>
-    <body>
-        <script type="text/javascript" src="js/custom-scroll.js"></script>
-        <?php require "includes/newuser.php" ?>
-        <?php require "includes/home.php" ?>
-        <?php require "includes/navbar.php" ?>
-        <?php require "includes/about.php" ?>
-        <?php require "includes/news.php" ?>
-        <?php require "includes/contacts.php" ?>
-        <?php require "includes/login.php" ?>
-        <footer class="footer">
-            <div class="container">
-                <div class="credits">
-                    This website is based on styles and animations from <a href="https://bootstrapmade.com/free-business-bootstrap-themes-website-templates/">Business Bootstrap Themes</a> by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                </div>
-            </div>
-        </footer>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Prizm</title>
+    <?php require __DIR__ . '/includes/head.php'; ?>
+</head>
+<body>
+<?php
+$navMode = 'home';
+$activeNav = 'home';
+require __DIR__ . '/includes/navigation.php';
+?>
+<main id="content">
+    <?php require __DIR__ . '/includes/home.php'; ?>
+    <?php require __DIR__ . '/includes/about.php'; ?>
+    <?php require __DIR__ . '/includes/news.php'; ?>
+    <?php require __DIR__ . '/includes/contacts.php'; ?>
+    <section class="band">
+        <div class="container account-grid">
+            <?php require __DIR__ . '/includes/login.php'; ?>
+            <?php require __DIR__ . '/includes/newuser.php'; ?>
+        </div>
+    </section>
+</main>
+<?php require __DIR__ . '/includes/footer.php'; ?>
+</body>
 </html>

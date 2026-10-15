@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Mug">
+  <rect width="400" height="300" fill="#efe7da"/>
+  <rect x="108" y="78" width="150" height="140" rx="16" fill="#2c3f73"/>
+  <path d="M258 112h28a36 36 0 0 1 0 72h-28" fill="none" stroke="#1b1730" stroke-width="14"/>
+  <rect x="124" y="98" width="118" height="16" fill="#d6453d"/>
+</svg>
