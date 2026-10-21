@@ -1,32 +1,40 @@
-<?php require "./util.php"?>
 <?php
-$uid = $_GET["uid"];
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "272project";
+declare(strict_types=1);
 
-$con = mysql_connect($servername,$username,$password);
-if (!$con)
-  {
-  die('Could not connect: ' . mysql_error());
-  }
+require_once __DIR__ . '/util.php';
 
-mysql_select_db($dbname,$con);
-$product_ids = array();
-$inner_sql = "SELECT orderid FROM orders WHERE userid = ".$uid."";
-$sql = "SELECT distinct productid FROM ordermap WHERE orderid IN ( ".$inner_sql.");";
-$result = mysql_query($sql);
-while($row = mysql_fetch_array($result)){
-    array_push($product_ids,$row["productid"]);
-}    
-
-    
-
-
-foreach ($product_ids as $product_id){
-    buildProductsUI(true, $product_id);
+$uid = prizm_id($_GET['uid'] ?? null);
+$rows = [];
+$error = null;
+try {
+    if ($uid === null) {
+        $error = 'Add a user id, for example user_recommend.php?uid=1.';
+    } else {
+        $rows = prizm_recommend($uid);
+    }
+} catch (Throwable $e) {
+    error_log($e->getMessage());
+    $error = 'Recommendations are unavailable.';
 }
-?>
 
+prizm_header('Recommendations - Every One Must Shop');
+?>
+<main id="content" class="container page">
+    <p class="eyebrow">Recommendations</p>
+    <h1>From past orders</h1>
+    <?php if ($error !== null) { ?>
+        <p class="form-error"><?php echo prizm_h($error); ?></p>
+    <?php } elseif ($rows === []) { ?>
+        <p>No recommendations yet.</p>
+    <?php } else { ?>
+        <div id="products" class="row">
+            <?php
+            foreach ($rows as $row) {
+                echo createProductUI($row['id'], $row['imgUrl'], $row['description'], $row['name'], $row['price']);
+            }
+        ?>
+        </div>
+    <?php } ?>
+</main>
+<?php prizm_footer(); ?>

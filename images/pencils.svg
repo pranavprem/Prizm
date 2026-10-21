@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Pencils">
+  <rect width="400" height="300" fill="#efe7da"/>
+  <g fill="#1b1730">
+    <rect x="150" y="70" width="16" height="150" transform="rotate(-12 158 145)"/>
+    <rect x="190" y="64" width="16" height="160"/>
+    <rect x="230" y="70" width="16" height="150" transform="rotate(12 238 145)"/>
+  </g>
+  <g fill="#d6453d">
+    <polygon points="168,214 176,214 172,232"/>
+    <polygon points="190,224 206,224 198,244"/>
+    <polygon points="222,214 230,214 226,232"/>
+  </g>
+</svg>

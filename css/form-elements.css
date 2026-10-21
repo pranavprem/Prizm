@@ -1,0 +1,90 @@
+.account-card form,
+.search-form,
+.review-form {
+    display: grid;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+label {
+    font-size: 14px;
+    color: var(--ink-soft);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea,
+.search-form input {
+    width: 100%;
+    max-width: 420px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+    border-radius: 0;
+    box-shadow: none;
+}
+
+textarea {
+    max-width: 640px;
+}
+
+input:focus,
+textarea:focus {
+    outline: 2px solid var(--ink);
+    outline-offset: 1px;
+    border-color: var(--ink);
+}
+
+.btn {
+    border-radius: 0;
+    letter-spacing: 0.02em;
+}
+
+.btn-success {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #f6f1e8;
+}
+
+.btn-success:hover,
+.btn-success:focus {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff;
+}
+
+.btn-warning {
+    background: transparent;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+    background: var(--ink);
+    color: #f6f1e8;
+}
+
+.form-error {
+    color: var(--red);
+    font-weight: 600;
+}
+
+.hint {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.search-form {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    max-width: 640px;
+    margin-bottom: 24px;
+}
+
+.search-form label {
+    grid-column: 1 / -1;
+}
